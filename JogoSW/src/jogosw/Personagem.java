@@ -33,7 +33,7 @@ public class Personagem implements verPontos{
     public void aumentaAtaque(int ataque, int arma)
     {
         if(arma >= 0 && ataque >= 0)
-            this.ataque+= this.arma + (this.ataque*nivel);
+            this.ataque+= this.ataque*nivel + this.arma;
         else
             throw new IllegalArgumentException("Pare de trollar o jogo");
     }
@@ -41,17 +41,14 @@ public class Personagem implements verPontos{
     public void aumentaDefesa(int defesa, int escudo)
     {
         if(defesa >= 0 && escudo >= 0)
-            this.defesa+= this.escudo + (this.defesa*nivel);
+            this.defesa+= this.defesa* nivel + this.escudo;
         else
             throw new IllegalArgumentException("Pare de trollar o jogo");
     }
     
-    public void aumentaNivel(int nivel)
+    public void aumentaNivel()
     {
-        if(nivel > 0)
-            this.nivel+= nivel;
-        else
-            throw new IllegalArgumentException("Pare de trollar o jogo");
+        nivel++;
     }
     
     
@@ -74,7 +71,7 @@ public class Personagem implements verPontos{
     public void aumentaVida(int vida)
     {
         if(vida > 0)
-            this.vida+= vida;
+            this.vida+= vida * nivel;
         else
             throw new IllegalArgumentException("Pare de trollar o jogo");
     }
@@ -116,5 +113,9 @@ public class Personagem implements verPontos{
     @Override
     public int retornaVida() {
         return vida;
+    }
+
+    public double getDinheiro() {
+        return dinheiro;
     }
 }

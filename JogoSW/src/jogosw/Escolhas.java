@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Propósito: O jogador irá escolher uma classe, e um lado, para jogar.
  */
 package jogosw;
 
@@ -18,35 +16,53 @@ public class Escolhas {
     }
     
     Personagem player = new Personagem(jogador);
-    
-    
-    public boolean Lado(int escolha)
+       
+    public enum Lado
     {
-        return escolha == 1;
+        Bogan,
+        Ashla,
     }
     
-    public void Classe(int escolha, int classe)
+    private enum Classe
     {
-        if(Lado(escolha))
+        Rebedes,
+        DroidesBem,
+        Pilotos,
+        Stromtrooper,
+        DroidesMal,
+        BodyHunter
+    }
+    private String classe,lado;
+    
+    
+    public void escolheLado(int numero)
+    {
+        if (numero == 1) lado = Lado.Bogan.toString();
+        else lado = Lado.Ashla.toString();
+    }
+    
+    public String escolheClasse(int numero)
+    {
+        switch(numero)
         {
-            switch(classe){
-                case 1: player.colocarNome("Rebeldes");
-                break;
-                case 2: player.colocarNome("Dróides do Bem");
-                break;
-                default: player.colocarNome("Pilotos");
-            }
+            case 1: classe = Classe.Rebedes.toString();
+            break;
+            case 2: classe = Classe.DroidesBem.toString();
+            break;
+            case 3: classe = Classe.Pilotos.toString();
+            break;
+            case 4: classe = Classe.Stromtrooper.toString();
+            break;
+            case 5: classe = Classe.DroidesMal.toString();
+            break;
+            default: classe = Classe.BodyHunter.toString();
         }
-        
-        else
-        {
-            switch(classe){
-                case 1: player.colocarNome("Stromtrooper");
-                break;
-                case 2: player.colocarNome("Dróides do Mal");
-                break;
-                default: player.colocarNome("Body Hunter");
-            }
-        }
+        return classe;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return classe;
     }
 }

@@ -10,11 +10,16 @@ import java.util.Scanner;
  * @author Mateus
  */
 public class JogoSW {
-
+    
+    
+    static Compras compra;
     static Personagem personagem;
     static Escolhas escolha;
     static Jogador player;
+    static Batalha batalha;
     static Scanner digitar = new Scanner(System.in);
+    
+    
     /**
      * @param args 
      */
@@ -48,6 +53,9 @@ public class JogoSW {
         lado = digitar.nextInt();
         if(lado == 1)
         {
+            classe = 0;
+            while(classe < 1 || classe > 3)
+            {
             System.out.println("Lado Azul da Força - Ashla");
             System.out.println("Dificil de ver sempre em movimento está o futuro");
             System.out.println("Escolha a classe do seu personagem...");
@@ -56,30 +64,37 @@ public class JogoSW {
             System.out.println("(3) Pilotos"); 
             System.out.println("(Qualquer outro número) Voltar para escolher o lado");
             classe = digitar.nextInt();
+            escolha.escolheLado(1);
             
             if(classe < 4 && classe > 0)
             {
                 escolheu = true;
-                escolha.Classe(1, classe);
+                escolha.escolheClasse(classe);
             }
+           }
         }
         
         else
         {
+          classe = 0;
+          while(classe  < 3 || classe > 6)
+          {
             System.out.println("Lado Negro da Força - Bogan");
             System.out.println("É preciso ter força, para resistir ao lado sombrio da força, só o fraco o adota.");
             System.out.println("Escolha a classe do seu personagem...");
-            System.out.println("(1) Stromtrooper");
-            System.out.println("(2) Dróides do mal");
-            System.out.println("(3) Body Hunter"); 
+            System.out.println("(4) Stromtrooper");
+            System.out.println("(5) Dróides do mal");
+            System.out.println("(6) Body Hunter"); 
             System.out.println("(Qualquer outro número) Voltar para escolher o lado");
             classe = digitar.nextInt();
+            escolha.escolheLado(2);
             
-            if(classe < 4 && classe > 0)
+            if(classe > 3 && classe < 7)
             {
                 escolheu = true;
-                escolha.Classe(1, classe);
-            } 
+                escolha.escolheClasse(classe);
+            }
+          }
         }
         AtribuindoPontos();
     }
@@ -93,7 +108,7 @@ public class JogoSW {
         int i = 5, distribuir;
         while(i > 0)
         {
-            System.out.printf("Você tem %d pontos para distribuir...",i);
+            System.out.printf("Você tem %d pontos (surpresa hehe...) para distribuir...",i);
             System.out.println("Escolha entre ataque, defesa e vida");
             System.out.println("(1) Ataque");
             System.out.println("(2) Defesa");
@@ -116,15 +131,149 @@ public class JogoSW {
                         i--;
            }
             System.out.printf("\nNick do Jogador: %s",player.toString());
-            System.out.printf("\nClasse do personagem: %s",personagem.toString());
+            System.out.printf("\nClasse do personagem: %s",escolha.toString());
             System.out.printf("\nPontos de Ataque: %d",personagem.retornaAtaque());
             System.out.printf("\nPontos de Defesa: %d",personagem.retornaDefesa());
             System.out.printf("\nPontos de Vida: %d\n",personagem.retornaVida());
     }
+        Comprar(0);
   }
-    public void Comprar()
+    
+    
+    public static void Comprar(int codigo)
     {
-        //Vou jogar amanhã vejo isso!
+        System.out.println("-----------------------------------------------------------------------");
+        String resposta;
+        int numero, pocao;
+        char primeiraLetra = 'N';
+        
+        if(codigo != 1)
+        {
+        System.out.println("Deseja comprar algo antes, de ir para a batalha?");
+        resposta = digitar.next();
+        primeiraLetra = resposta.charAt(0);
+        System.out.println("\n");
+        }
+        
+        
+        if(primeiraLetra == 'S' || primeiraLetra == 's' || codigo == 1)
+        {
+            compra = new Compras();
+            System.out.println("Escolha o tipo de produto que deseja comprar...\n");
+            
+            do {
+            System.out.println("(1) Poção de Ataque");
+            System.out.println("(2) Poção de Defesa\n");
+            numero = digitar.nextInt();
+            }while(numero < 1 || numero > 2);
+            
+            if(numero == 1)
+            {
+                do{
+            System.out.println("(1) Poção Ataque Fraco");
+            System.out.println("(2) Poção Ataque Médio");
+            System.out.println("(3) Poção Ataque Forte\n");
+            pocao = digitar.nextInt();
+                   }while(pocao < 1 || pocao > 3);
+            
+                switch(pocao)
+                {
+                case 1: Comprando(111);
+                break;
+                case 2: Comprando(112);
+                break;
+                default: Comprando(113);
+                }
+            }
+          
+            else
+            {
+                do{
+            System.out.println("(1) Poção Defesa Fraco");
+            System.out.println("(2) Poção Defesa Médio");
+            System.out.println("(3) Poção Defesa Forte\n");
+            pocao = digitar.nextInt();
+                }while(pocao < 1 || pocao > 3);
+                
+                switch(pocao)
+                {
+                case 1: Comprando(211);
+                break;
+                case 2: Comprando(212);
+                break;
+                default: Comprando(213);
+                }
+            }
+        }
+        else
+        {
+            Batalha();
+        }
+  }
+    
+    private static void Comprando(int codigo)
+    {
+        boolean semDinheiro = false;
+        String resposta;
+        
+        if(codigo == 111 || codigo == 211)
+        {
+            if(personagem.getDinheiro() >= 1000)
+            {
+                personagem.gastaDinheiro(1000);
+                compra.comprarPocao(codigo);
+            }
+           else
+            {
+                semDinheiro = true;
+            }
+        }
+        else if(codigo == 112 || codigo  == 212)
+        {
+            if(personagem.getDinheiro() >= 2000)
+            {
+                personagem.gastaDinheiro(2000);
+                compra.comprarPocao(codigo);
+            }
+            else
+            {
+                semDinheiro = true;
+            }
+        }
+        else
+        {
+            if(personagem.getDinheiro() >= 5000)
+            {
+                personagem.gastaDinheiro(5000);
+                compra.comprarPocao(codigo);
+            }
+            else
+            {
+                semDinheiro = true;
+            }
+        }
+            if(semDinheiro)
+                System.out.println("Você não tem dinheiro para comprar a poção");
+            else
+            {
+            System.out.printf("\nDinheiro do personagem: %f",personagem.getDinheiro());
+                System.out.printf("\n Quantidade de produtos em estoque: %s",compra.toString());
+            }
+            
+            System.out.println("\nDeseja Comprar mais produtos?");
+            resposta = digitar.next();
+            if(resposta.charAt(0) == 'S' || resposta.charAt(0) == 's')
+            {
+                Comprar(1);
+            }
+            else
+            {
+                Batalha();
+            }
+    }
+    
+    private static void Batalha()
+    {
+        
     }
 }
-

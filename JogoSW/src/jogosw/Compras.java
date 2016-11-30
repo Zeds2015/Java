@@ -11,9 +11,9 @@ package jogosw;
  */
 public class Compras {
         
-        private static int pocaoAtaque1 = 15, pocaoAtaque2 = 10,
-        pocaoAtaque3 = 5, pocaoDefesa1 = 15,
-        pocaoDefesa2 = 10,pocaoDefesa3 = 5;
+        private static int armaAtaque1 = 15, armaAtaque2 = 10,
+        armaAtaque3 = 5, escudoDefesa1 = 15,
+        escudoDefesa2 = 10,escudoDefesa3 = 5;
     
     public void comprarPocao(int numero)
     {
@@ -22,18 +22,29 @@ public class Compras {
         if(!semPocaoAtaque() || !semPocaoDefesa()){
         switch(numero)
         {
-            case 111: pocaoAtaque1 --;
-            break;
-            case 112: pocaoAtaque2 --;
-            break;
-            case 113: pocaoAtaque3 --;
-            break;
-            case 211: pocaoDefesa1 --;
-            break;
-            case 212: pocaoDefesa2 --;
-            break;
-            case 213: pocaoDefesa3 --;
-            break;
+            case 111: armaAtaque1 --;
+                      Mochila.setArmaAtaque1(1);
+                       break;
+            
+            case 112: armaAtaque2 --;
+                      Mochila.setArmaAtaque2(1);
+                        break;
+            
+            case 113: armaAtaque3 --;
+                      Mochila.setArmaAtaque3(1);
+                        break;
+            
+            case 211: escudoDefesa1 --;
+                      Mochila.setEscudoDefesa1(1);
+                       break;
+            
+            case 212: escudoDefesa2 --;
+                      Mochila.setEscudoDefesa2(1);
+                        break;
+                        
+            case 213: escudoDefesa3 --;
+                      Mochila.setEscudoDefesa3(1);  
+                        break;
         }
     }
 }
@@ -42,32 +53,32 @@ public class Compras {
     {
         if(semPocaoAtaque())
         {
-           pocaoAtaque1+= 2; 
-           pocaoAtaque2+= 3; 
-           pocaoAtaque3+= 4;
+           armaAtaque1+= 2; 
+           armaAtaque2+= 3; 
+           armaAtaque3+= 4;
         }
         else if(semPocaoDefesa())
         {
-         pocaoDefesa1+= 2;
-         pocaoDefesa2+= 3; 
-         pocaoDefesa3+= 4;
+         escudoDefesa1+= 2;
+         escudoDefesa2+= 3; 
+         escudoDefesa3+= 4;
         }
     }
     
     @Override
     public String toString()
     {
-        return "Quantidade de poção no estoque...\n Poção Ataque Fraco: " + pocaoAtaque1 + "\nPoção Ataque Médio: " + pocaoAtaque2 +
-               "\nPocao Ataque Forte: " + pocaoAtaque3 + "\nPocao Defesa Fraco: " + pocaoDefesa1 + "\nPoção Defesa Médio: " + pocaoDefesa2 +
-                "\nPoção Defesa Forte: " + pocaoDefesa3;
+        return "Quantidade de poção no estoque...\n Poção Ataque Fraco: " + armaAtaque1 + "\nPoção Ataque Médio: " + armaAtaque2 +
+               "\nPocao Ataque Forte: " + armaAtaque3 + "\nPocao Defesa Fraco: " + escudoDefesa1 + "\nPoção Defesa Médio: " + escudoDefesa2 +
+                "\nPoção Defesa Forte: " + escudoDefesa3;
     }
     
     private boolean semPocaoAtaque() 
     {
-        return pocaoAtaque1 == 0 || pocaoAtaque2 == 0 || pocaoAtaque3 == 0;
+        return armaAtaque1 == 0 || armaAtaque2 == 0 || armaAtaque3 == 0;
     }
     private boolean semPocaoDefesa() 
     {
-        return pocaoDefesa1 == 0 || pocaoDefesa2 == 0 || pocaoDefesa3 == 0;
+        return escudoDefesa1 == 0 || escudoDefesa2 == 0 || escudoDefesa3 == 0;
     }
 }

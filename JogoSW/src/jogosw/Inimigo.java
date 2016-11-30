@@ -3,56 +3,73 @@
  */
 package jogosw;
 
-import java.util.Random;
-
 /**
  *
  * @author Mateus
  */
-public class Inimigo implements verPontos
+public class Inimigo
 {
     private int ataque = 0, defesa = 0, vida = 0, escudo = 0, arma = 0, nivel = 0;
-    
-    
-        Inimigo()
-        {
-            Random gerador = new Random();
-            ataque = (int) gerador.nextGaussian() * 100000;
-            defesa = (int) gerador.nextGaussian() * 100000;
-            vida = (int) gerador.nextGaussian() * 100000;
-            escudo = (int) gerador.nextGaussian() * 100000;
-            arma = (int) gerador.nextGaussian() * 100000;
-            nivel = (int) gerador.nextGaussian() * 100000;
-        }
         
     public void perdeVida(int vida)
     {
         if(vida > 0)
-            this.vida-= vida;
-        else
-            throw new IllegalArgumentException("Pare de trollar o jogo");
-    }
-    
-    public void aumentaVida(int vida)
-    {
-        if(vida > 0)
-            this.vida+= vida;
+            this.vida = this.vida - vida;
         else
             throw new IllegalArgumentException("Pare de trollar o jogo");
     }
 
-    @Override
-    public int retornaDefesa() {
-        return defesa;
-    }
-
-    @Override
-    public int retornaAtaque() {
+    public int getAtaque() {
         return ataque;
     }
 
-    @Override
-    public int retornaVida() {
+    public int getDefesa() {
+        return defesa;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public int getVida() {
         return vida;
+    }
+    
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+    
+    public void setDefesa(int defesa) {
+        this.defesa = defesa;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+    public int getEscudo() {
+        return escudo;
+    }
+    
+    public void setEscudo(int escudo) {
+        this.escudo = escudo;
+    }
+    
+    public int getArma() {
+        return arma;
+    }
+
+    public void setArma(int arma) {
+        this.arma = arma;
+    }
+    
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+     public void diminuiDefesa(int defesa)
+    {
+        if(defesa > 0)
+            this.defesa-= defesa;
+        else
+            throw new IllegalArgumentException("Pare de trollar o jogo");
     }
 }

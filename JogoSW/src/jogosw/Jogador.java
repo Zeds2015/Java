@@ -16,15 +16,7 @@ public class Jogador {
     Jogador(String nick, int idade, int sexo)
     {
         this.nick = nick;
-        
-        if(idade > 3)
-        {
         this.idade = idade;
-        }
-        else{
-            throw new IllegalArgumentException("Idade inválida");
-        }
-        
         if (sexo == 1)
             this.sexo = "Masculino";
         else

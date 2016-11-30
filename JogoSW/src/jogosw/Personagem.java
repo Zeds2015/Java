@@ -19,9 +19,9 @@ public class Personagem implements verPontos{
         player = jogador;
     }
     
-    public void colocarNome(String nome)
+    public void colocarNome()
     {
-        nomePersonagem = nome;
+        nomePersonagem = player.nick;
     }
     
    @Override
